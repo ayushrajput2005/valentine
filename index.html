@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: pink;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            padding: 10px;
+        }
+        #message {
+            font-size: 5vw;
+            margin-bottom: 20px;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        button {
+            font-size: 4vw;
+            padding: 4vw;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+        #yes {
+            background-color: #ff4d4d;
+            color: white;
+            flex-grow: 1;
+            width: 40vw;
+            height: 15vh;
+        }
+        #no {
+            background-color: white;
+            color: black;
+            flex-grow: 1;
+            width: 40vw;
+            height: 15vh;
+        }
+        #cat-gif {
+            width: 40vw;
+            max-width: 150px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            #message {
+                font-size: 6vw;
+                margin-bottom: 30px;
+            }
+            #cat-gif {
+                width: 60vw;
+                max-width: 200px;
+            }
+            .btn-container {
+                flex-direction: row;
+                align-items: center;
+            }
+            button {
+                font-size: 6vw;
+                padding: 4vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="message">Will you be my Valentine? 💖</div>
+    <img id="cat-gif" src="PleaseGIF.gif" alt="Cute Cat Convincing" />
+    <div class="btn-container">
+        <button id="yes" onclick="acceptLove()">Yes</button>
+        <button id="no" onclick="nextLevel()">No</button>
+    </div>
+
+    <script>
+        let level = 1;
+        const messages = [
+            "Are you sure? 🥺",
+            "Think again... 💕",
+            "Please? 😢",
+            "Don't break my heart... 💔",
+            "Last chance! 😖",
+            "Haha! Now you HAVE to say yes!"
+        ];
+
+        function acceptLove() {
+            document.body.innerHTML = "<h1>Yay! You said YES! 🎉💖</h1>" +
+                                      "<img src='HugCouple.gif' alt='Couple Hugging' style='width:50vw; max-width:300px;'>";
+        }
+
+        function nextLevel() {
+            const yesBtn = document.getElementById("yes");
+            const noBtn = document.getElementById("no");
+            const message = document.getElementById("message");
+
+            if (level < messages.length) {
+                message.innerText = messages[level - 1];
+                yesBtn.style.width = `${40 + level * 10}vw`;
+                yesBtn.style.height = `${15 + level * 10}vh`;
+                noBtn.style.width = `${Math.max(10, 40 - level * 5)}vw`;
+                noBtn.style.height = `${Math.max(5, 15 - level * 2)}vh`;
+                level++;
+            } else {
+                message.innerText = "Haha! Now you HAVE to say yes!";
+                noBtn.style.display = "none";
+                yesBtn.style.width = "100vw";
+                yesBtn.style.height = "100vh";
+                yesBtn.style.fontSize = "10vw";
+            }
+        }
+    </script>
+</body>
+<!-- hello  -->
+</html>
